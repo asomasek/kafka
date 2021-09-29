@@ -1,0 +1,34 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6500
+runAs: root
+shell: bash
+env:
+#variables:
+# "testEnv" : "testValue1"
+#exportedVariables:
+#  - testEnv
+ 
+# inputArtifacts:
+# - name: hello-dev-jar
+# location: hello123.class
+
+ 
+steps:
+- type: Command
+  name: "One Hour Step"
+  timeoutInSeconds: 7200
+  command: |
+    sleep 3600
+    echo "Done Sleeping!"
+  onFailure:
+    - type: Command
+      timeoutInSeconds: 400
+      command: |
+        echo "Handling Failure"
+        echo "Failure successfully handled"
+ 
+outputArtifacts:
+- name: kafka_2_13_3_0_0
+  type: BINARY
+  location: ./core/build/distributions/kafka_2.13-3.0.0-SNAPSHOT.tgz
