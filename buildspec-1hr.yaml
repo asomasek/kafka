@@ -19,8 +19,9 @@ steps:
   name: "One Hour Step"
   timeoutInSeconds: 7200
   command: |
-    sleep 3600
-    echo "Done Sleeping!"
+    chmod +x loop
+    ./loop
+    echo "Done Looping!"
   onFailure:
     - type: Command
       timeoutInSeconds: 400
