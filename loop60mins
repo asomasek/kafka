@@ -1,0 +1,6 @@
+for (( i=0; i<=720; i++))
+do
+    x=$(( 5*i ))
+    echo "Elapsed time in secs: $x"
+    sleep 5
+done
