@@ -19,8 +19,8 @@ steps:
   name: "One Hour Step"
   timeoutInSeconds: 7200
   command: |
-    chmod +x loop
-    ./loop
+    chmod +x loop60mins
+    ./loop60mins
     echo "Done Looping!"
   onFailure:
     - type: Command
