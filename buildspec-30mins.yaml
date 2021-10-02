@@ -1,6 +1,6 @@
 version: 0.1
 component: build
-timeoutInSeconds: 6500
+timeoutInSeconds: 7200
 runAs: root
 shell: bash
 env:
@@ -16,8 +16,21 @@ env:
  
 steps:
 - type: Command
-  name: "One Hour Step"
-  timeoutInSeconds: 7200
+  name: "Build kafka"
+  timeoutInSeconds: 6000
+  command: |
+    ./gradlew clean releaseTarGz
+    echo "Build Done"
+  onFailure:
+    - type: Command
+      timeoutInSeconds: 400
+      command: |
+        echo "Handling Failure"
+        echo "Failure successfully handled"
+
+- type: Command
+  name: "30 Mins Step"
+  timeoutInSeconds: 3600
   command: |
     chmod +x loop
     ./loop
